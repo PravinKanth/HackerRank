@@ -20,7 +20,7 @@ class Result {
         int f;
         if(am.equals("AM")){
             if(b==12){
-                f=1;
+                f=0;
             }
             else{
                 f=b;
