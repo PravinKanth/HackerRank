@@ -1,0 +1,55 @@
+import java.io.*;
+import java.math.*;
+import java.security.*;
+import java.text.*;
+import java.util.*;
+import java.util.concurrent.*;
+import java.util.regex.*;
+
+class Result {
+
+  
+
+    public static int designerPdfViewer(List<Integer> h, String word) {
+    String a="abcdefghijklmnopqrstuvwxyz";
+    char[] c=a.toCharArray();
+    char[] b=word.toCharArray();
+    int max=0;
+    for(char i:b){
+        int d=a.indexOf(i);
+        int e=h.get(d);
+        if(e>max){
+            max=e;
+        }
+        
+    }
+    return max*b.length;
+    }
+
+}
+
+public class Solution {
+    public static void main(String[] args) throws IOException {
+        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
+        BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(System.getenv("OUTPUT_PATH")));
+
+        String[] hTemp = bufferedReader.readLine().replaceAll("\\s+$", "").split(" ");
+
+        List<Integer> h = new ArrayList<>();
+
+        for (int i = 0; i < 26; i++) {
+            int hItem = Integer.parseInt(hTemp[i]);
+            h.add(hItem);
+        }
+
+        String word = bufferedReader.readLine();
+
+        int result = Result.designerPdfViewer(h, word);
+
+        bufferedWriter.write(String.valueOf(result));
+        bufferedWriter.newLine();
+
+        bufferedReader.close();
+        bufferedWriter.close();
+    }
+}
