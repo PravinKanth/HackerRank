@@ -1,0 +1,72 @@
+import java.io.*;
+import java.math.*;
+import java.security.*;
+import java.text.*;
+import java.util.*;
+import java.util.concurrent.*;
+import java.util.regex.*;
+
+class Result {
+
+
+    public static int hurdleRace(int k, List<Integer> height) {
+        int k1=0;
+    for(int i=0;i<height.size();i++){
+        if(height.get(i)>k1){
+            k1=height.get(i);
+        }
+        
+    }
+    int dum=0;
+    boolean flag=true;
+for(int j:height){
+    if(j<k){
+        flag=true;
+        
+    }
+    else{
+        flag=false;
+        break;
+    }
+}
+if(flag){
+    dum=0;
+}
+else{
+    dum=k1-k;
+}
+
+return dum;
+    }
+
+}
+
+public class Solution {
+    public static void main(String[] args) throws IOException {
+        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
+        BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(System.getenv("OUTPUT_PATH")));
+
+        String[] firstMultipleInput = bufferedReader.readLine().replaceAll("\\s+$", "").split(" ");
+
+        int n = Integer.parseInt(firstMultipleInput[0]);
+
+        int k = Integer.parseInt(firstMultipleInput[1]);
+
+        String[] heightTemp = bufferedReader.readLine().replaceAll("\\s+$", "").split(" ");
+
+        List<Integer> height = new ArrayList<>();
+
+        for (int i = 0; i < n; i++) {
+            int heightItem = Integer.parseInt(heightTemp[i]);
+            height.add(heightItem);
+        }
+
+        int result = Result.hurdleRace(k, height);
+
+        bufferedWriter.write(String.valueOf(result));
+        bufferedWriter.newLine();
+
+        bufferedReader.close();
+        bufferedWriter.close();
+    }
+}
