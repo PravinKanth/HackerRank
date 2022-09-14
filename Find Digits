@@ -1,0 +1,15 @@
+a=int(input())
+last=[]
+for _ in range(a):
+    b=int(input())
+    c=str(b)
+    count=0
+    for i in c:
+        if int(i)!=0:
+            if b%int(i)==0:
+                count+=1
+    last.append(count)
+for j in last:
+    print(j)                
+        
+    
