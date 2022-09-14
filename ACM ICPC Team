@@ -1,0 +1,14 @@
+a,b=list(map(int,input().split()))
+lst=[]
+maxlst=[]
+for _ in range(a):
+    c=input()
+    lst.append(c)
+for i in range(0,a-1):
+    for j in range(i+1,a):
+        cnt=0
+        res=0
+        tmp = bin(int(lst[i], 2) | (int(lst[j], 2))).count("1")
+        maxlst.append(tmp)
+print(max(maxlst))      
+print(maxlst.count(max(maxlst)))             
