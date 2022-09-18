@@ -1,0 +1,120 @@
+import java.io.*;
+import java.math.*;
+import java.security.*;
+import java.text.*;
+import java.util.*;
+import java.util.concurrent.*;
+import java.util.function.*;
+import java.util.regex.*;
+import java.util.stream.*;
+import static java.util.stream.Collectors.joining;
+import static java.util.stream.Collectors.toList;
+
+class Result {
+
+
+    public static String happyLadybugs(String b) {
+         String ans="";
+        ArrayList<String> arr = new ArrayList<>();
+        ArrayList<String> arr1 = new ArrayList<>();
+        TreeSet<String> set = new TreeSet<>();
+        for (char c : b.toCharArray()) {
+            set.add(String.valueOf(c));
+            arr.add(String.valueOf(c));
+            arr1.add(String.valueOf(c));
+        }
+        arr1.add(" ");
+        int count = 0;
+        boolean flag = false;
+        if(arr.contains("_")) {
+            label:
+            for (String i : set) {
+                count = 0;
+                flag = true;
+
+                for (String j : arr) {
+                    if (i.equals("_")) {
+                        continue label;
+                    } else {
+                        if (i.equals(j)) {
+                            count++;
+                        }
+                    }
+                }
+                if (count == 1) {
+                    flag = false;
+                    break;
+                }
+            }
+            if (flag) {
+                ans="YES";
+            } else {
+                ans="NO";
+            }
+        }
+        else if(set.size()==1 && set.first().equals("_")){
+            ans="YES";
+        }
+
+        else{
+
+            int count5=1;
+            ArrayList<Integer> total=new ArrayList<>();
+            for(int k=0;k<arr1.size()-1;k++){
+                if(arr1.get(k).equals(arr1.get(k+1))){
+                    count5++;
+                }
+                else{
+                    total.add(count5);
+                    count5=1;
+                }
+
+            }
+            boolean w=true;
+            for(int r:total){
+                if(r==1){
+                    w=false;
+                    break;
+                }
+            }
+if(w){
+    ans="YES";
+}
+else{
+    ans="NO";
+}
+        }
+
+
+return ans;
+
+    }
+
+}
+
+public class Solution {
+    public static void main(String[] args) throws IOException {
+        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
+        BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(System.getenv("OUTPUT_PATH")));
+
+        int g = Integer.parseInt(bufferedReader.readLine().trim());
+
+        IntStream.range(0, g).forEach(gItr -> {
+            try {
+                int n = Integer.parseInt(bufferedReader.readLine().trim());
+
+                String b = bufferedReader.readLine();
+
+                String result = Result.happyLadybugs(b);
+
+                bufferedWriter.write(result);
+                bufferedWriter.newLine();
+            } catch (IOException ex) {
+                throw new RuntimeException(ex);
+            }
+        });
+
+        bufferedReader.close();
+        bufferedWriter.close();
+    }
+}
