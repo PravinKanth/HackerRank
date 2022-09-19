@@ -1,0 +1,97 @@
+import java.io.*;
+import java.math.*;
+import java.security.*;
+import java.text.*;
+import java.util.*;
+import java.util.concurrent.*;
+import java.util.function.*;
+import java.util.regex.*;
+import java.util.stream.*;
+import static java.util.stream.Collectors.joining;
+import static java.util.stream.Collectors.toList;
+
+class Result {
+
+    public static String superReducedString(String s) {
+        String ans="";
+         ArrayList<String> arr1 = new ArrayList<>();
+        for (char c : s.toCharArray()) {
+            arr1.add(String.valueOf(c));
+        }
+        arr1.add(" ");
+        int count = 0;
+        boolean flag = false;
+
+        while(true){
+        int count5 = 1;
+        ArrayList<Integer> total = new ArrayList<>();
+        TreeSet<Integer> set = new TreeSet<>();
+        for (int k = 0; k < arr1.size() - 1; k++) {
+            if (arr1.get(k).equals(arr1.get(k + 1))) {
+                 count5++;
+                if(count5%2==0){
+                    set.add(k);
+                    set.add(k + 1);
+                }
+            } else {
+                total.add(count5);
+                count5 = 1;
+            }
+
+        }
+        
+        if(set.size()==0){
+            for(String g:arr1){
+                ans+=g;
+
+            }
+            break;
+        }
+        ArrayList<String> dum = new ArrayList<>();
+        for (int i = 0; i < arr1.size(); i++) {
+            if (!set.contains(i)) {
+                dum.add(arr1.get(i));
+            }
+        }
+        if(dum.size()==1){
+
+                ans="Empty String";
+
+            break;
+        }
+
+
+        arr1.clear();
+        for (String j : dum) {
+            arr1.add(j);
+        }
+
+        dum.clear();
+        set.clear();
+
+
+    }
+
+
+    
+return ans;
+    }
+
+}
+
+public class Solution {
+    public static void main(String[] args) throws IOException {
+        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
+        BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(System.getenv("OUTPUT_PATH")));
+
+        String s = bufferedReader.readLine();
+
+        String result = Result.superReducedString(s);
+
+        bufferedWriter.write(result);
+        bufferedWriter.newLine();
+
+        bufferedReader.close();
+        bufferedWriter.close();
+    }
+}
