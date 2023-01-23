@@ -1,0 +1,41 @@
+#!/bin/python3
+
+import math
+import os
+import random
+import re
+import sys
+from collections import defaultdict
+
+#
+# Complete the 'gameOfThrones' function below.
+#
+# The function is expected to return a STRING.
+# The function accepts STRING s as parameter.
+#
+
+def gameOfThrones(s):
+    a=s
+    b=defaultdict(int)
+    for i in a:
+        b[i]+=1
+    count=0
+    for i in b:
+        if b[i]%2!=0:
+            count+=1
+            if count>1:
+                return("NO")
+                
+    return "YES"
+    
+
+if __name__ == '__main__':
+    fptr = open(os.environ['OUTPUT_PATH'], 'w')
+
+    s = input()
+
+    result = gameOfThrones(s)
+
+    fptr.write(result + '\n')
+
+    fptr.close()
